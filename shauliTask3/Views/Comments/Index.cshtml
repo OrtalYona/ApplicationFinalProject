@@ -1,0 +1,58 @@
+﻿@model IEnumerable<shauliTask3.Models.Comment>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>COMMENT MANAGMENT</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.post.PostTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CommentTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CommentWriter)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.commentWebSiteLink)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.text)
+        </th>
+
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.post.PostTitle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CommentTitle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CommentWriter)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.commentWebSiteLink)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.text)
+        </td>
+        <td>
+            @Html.ActionLink("Delete", "Delete", new { id=item.CommentID })
+        </td>
+    </tr>
+}
+  
+
+</table>

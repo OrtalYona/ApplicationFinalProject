@@ -1,0 +1,92 @@
+﻿@model IEnumerable<shauliTask3.Models.Post> 
+@using shauliTask3.Models;
+@{
+    ViewBag.Title = "Home";
+}
+
+
+
+<h2>POSTS</h2>
+@foreach (var item in Model)
+{
+
+    <article class="blogPost">
+        <header>
+            <h2>@Html.DisplayFor(modelItem => item.PostTitle)</h2>
+            <p>Posted on @Html.DisplayFor(modelItem => item.date) by <a href="@Html.DisplayNameFor(model => model.postWebSiteLink)">@Html.DisplayFor(modelItem => item.postWriter)</a> - <a href="#comments">@Html.DisplayFor(model => item.counter) comments</a></p>
+        </header>
+        <div>
+            <p>@Html.DisplayFor(modelItem => item.text)</p>
+        </div>
+            <div>
+            <img alt="Flower" src="~/images/@Html.DisplayFor(modelItem => item.image)">
+        </div>
+        <div>
+            @*<p></p>*@
+            <video controls="controls">
+                <source src="~/images/@Html.DisplayFor(modelItem => item.video)" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <p></p>
+        </div>
+    </article>
+    <section id="comments">
+        <h3>Comments</h3>
+        
+        @if (item.counter == 0)
+        {
+            <div align="left">There are no Comments Yet!</div>
+        }
+ 
+                 @foreach (var com in item.comments)
+                 {
+         
+            <article>
+                <p>
+                    @Html.DisplayFor(modeItem => com.CommentTitle) 
+                </p>
+                <header>
+                    <a href="@Html.DisplayFor(modelItem => com.commentWebSiteLink)"> @Html.DisplayFor(modelItem => com.CommentWriter)</a>
+                </header>
+
+                @Html.DisplayFor(modelItem => com.text)
+            </article>
+                 }
+        
+        
+
+    </section>
+
+    using (Html.BeginForm("CreateComment", "Comments"))
+    {
+        @Html.AntiForgeryToken()
+        <h3>Post a comment</h3>
+        @Html.Hidden("PostID", item.PostID)
+        <p>
+            <label for="Name">Name</label>
+            @Html.TextBox("CommentWriter")
+        </p>
+
+        <p>
+            <label for="commentTitle">Title</label>
+            @Html.TextBox("CommentTitle")
+        </p>
+            <p>
+                <label for="Website">Link</label>
+                @Html.TextBox("commentWebSiteLink")
+            </p>
+            <p>
+                <label for="Comment">Comment</label>
+                @Html.TextArea("text")
+            </p>
+            <p><input type="submit" value="Post comment" /></p>
+    }
+
+
+
+
+}
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

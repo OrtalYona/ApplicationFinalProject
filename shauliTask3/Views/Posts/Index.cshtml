@@ -1,0 +1,49 @@
+﻿@model IEnumerable<shauliTask3.Models.Post>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>BLOG MANAGMENT</h2>
+
+
+<table class="table">
+
+    <tr>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.PostTitle)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.postWriter)
+        </th>
+
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PostTitle)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.postWriter)
+        </td>
+
+
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.PostID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.PostID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.PostID })
+        </td>
+    </tr>
+}
+
+</table>
+<p>
+    @Html.ActionLink("Add New Post", "Create")
+</p>
+<p>
+    @Html.ActionLink("Comment Managment", "Index", "Comments")
+</p>
