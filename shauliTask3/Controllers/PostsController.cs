@@ -19,9 +19,27 @@ namespace shauliTask3.Controllers
         ///
         public ActionResult Index()
         {
+            var posts= from s in db.Posts select s;
 
-            return View(db.Posts.ToList());
+            return View(posts.ToList());
         }
+
+        [HttpPost]
+        public ViewResult Index( string searchString)
+        {
+
+            var posts = from s in db.Posts
+                           select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                posts = posts.Where(s => s.PostTitle.Contains(searchString));
+            }
+            return View(posts.ToList());
+        }
+
+
+
+
 
         public ActionResult Home()
         {
