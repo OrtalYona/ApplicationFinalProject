@@ -25,15 +25,55 @@ namespace shauliTask3.Controllers
         }
 
         [HttpPost]
-        public ViewResult Index( string searchString)
+        public ViewResult Index( string SearchTitle, String SearchName)
         {
+            List<Post> posts;
 
-            var posts = from s in db.Posts
-                           select s;
-            if (!String.IsNullOrEmpty(searchString))
+            String query = "select * from posts where {0}";
+            string select = "";
+            string where = "";
+
+            if (!String.IsNullOrEmpty(SearchTitle))
             {
-                posts = posts.Where(s => s.PostTitle.Contains(searchString));
+                select += "PostTitle,";
+                where += "PostTitle like '%" + SearchTitle + "%',";
             }
+            
+            if (!String.IsNullOrEmpty(SearchName))
+            {
+                select += "name,";
+
+                if (!String.IsNullOrEmpty(where))
+                {
+                    where += "and ";
+                }
+                where += "name like '%" + SearchName + "%',";
+            }
+
+            //select = select.Substring(0, select.Length - 1);
+
+
+            if (where == "")
+            {
+                query = query.Substring(0, query.Length - 10);
+            }
+            else
+            {
+                where = where.Substring(0, where.Length - 1);
+            }
+
+            query = String.Format(query, where);
+
+            posts = (List<Post>)db.Posts.SqlQuery(query).ToList();
+
+            //var posts = from s in db.Posts
+              //             select s;
+            //if (!String.IsNullOrEmpty(searchString))
+            //{
+            //    //posts = posts.Where(s => s.PostTitle.Contains(searchString));
+            //    posts = (IQueryable<Post>)db.Posts.SqlQuery(query);
+            //}
+
             return View(posts.ToList());
         }
         public ActionResult Home()
