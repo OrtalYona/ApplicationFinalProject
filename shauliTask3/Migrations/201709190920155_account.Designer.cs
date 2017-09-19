@@ -7,13 +7,13 @@ namespace shauliTask3.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class mig : IMigrationMetadata
+    public sealed partial class account : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(mig));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(account));
         
         string IMigrationMetadata.Id
         {
-            get { return "201709161706099_mig"; }
+            get { return "201709190920155_account"; }
         }
         
         string IMigrationMetadata.Source

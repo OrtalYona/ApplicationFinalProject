@@ -6,6 +6,20 @@
 
 <h2>BLOG MANAGMENT</h2>
 
+@using (Html.BeginForm())
+{
+
+    <h4>
+        Find By Name:
+
+        @Html.TextBox("SearchString")
+        <input type="submit" value="Search" />
+    </h4>
+}
+
+<p></p>
+
+
 
 <table class="table">
 

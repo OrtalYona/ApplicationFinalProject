@@ -39,7 +39,7 @@ namespace shauliTask3.Controllers
                 ModelState.Clear();
                 ViewBag.Message = account.FirstName + " " + account.LastName + " successfully registered ";
             }
-            return View();   
+            return View();
         }
         //login
         public ActionResult Login()
@@ -55,13 +55,13 @@ namespace shauliTask3.Controllers
 
                 var usr = db.userAccounts.SingleOrDefault(u => u.UserName == user.UserName && u.Password == user.Password);
 
-                if(usr != null)
+                if (usr != null)
 
                 {
                     Session["UserID"] = usr.UserID.ToString();
                     Session["UserName"] = usr.UserName.ToString();
-                    
-                    
+
+
                     return RedirectToAction("LoggedIn");
                 }
                 else
@@ -74,7 +74,7 @@ namespace shauliTask3.Controllers
 
         public ActionResult LoggedIn()
         {
-            if (Session["UserId"]!=null)
+            if (Session["UserId"] != null)
             {
                 return View();
             }
@@ -92,13 +92,13 @@ namespace shauliTask3.Controllers
             }
             using (AccountDbContext db = new AccountDbContext())
             {
-                 UsetAccount user = db.userAccounts.Find(id);
-            if (user == null)
-            {
-                return HttpNotFound();
+                UsetAccount user = db.userAccounts.Find(id);
+                if (user == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(user);
             }
-            return View(user);
-        }
         }
 
         // POST: Posts/Delete/5
@@ -142,7 +142,7 @@ namespace shauliTask3.Controllers
             using (AccountDbContext db = new AccountDbContext())
             {
                 UsetAccount user = db.userAccounts.Find(id);
-            
+
                 if (user == null)
                 {
                     return HttpNotFound();
@@ -186,25 +186,9 @@ namespace shauliTask3.Controllers
         {
 
             return View();
-            
-        }
-        [HttpPost]
-       // [ActionName("StartSearch")]
-        public ActionResult Search(string FirstName)
-        {
-            using (AccountDbContext db = new AccountDbContext())
-            {
 
-
-                var accounts = from a in db.userAccounts
-                               select a;
-        
-                if (FirstName != null)
-                {
-                    accounts = accounts.Where(x => x.FirstName == FirstName);
-                }
-                return View(accounts.OrderBy(x => x.UserID).ToList());//<----------Here is the problem. i tried to add "to-list".
-            }
         }
+
     }
+    
 }

@@ -16,8 +16,10 @@ namespace shauliTask3.Controllers
 
 
         // GET: Posts
+        ///
         public ActionResult Index()
         {
+
             return View(db.Posts.ToList());
         }
 
@@ -158,6 +160,8 @@ namespace shauliTask3.Controllers
 
             return View();
         }
+
+
 
 
         protected override void Dispose(bool disposing)
