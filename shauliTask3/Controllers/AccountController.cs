@@ -16,7 +16,9 @@ namespace shauliTask3.Controllers
         // GET: Account
         public ActionResult Index()
         {
-            if (Session["UserID"] != null)
+            if (Session["UserID"] == null)
+                return RedirectToAction("Index");
+            else if (((shauliTask3.Models.UsetAccount)Session["User"]).IsAdmin)
             {
                 using (AccountDbContext db = new AccountDbContext())
                 {
@@ -26,6 +28,7 @@ namespace shauliTask3.Controllers
             else
             {
                 return RedirectToAction("Index");
+            
             }
         }
         public ActionResult Register()
@@ -68,6 +71,7 @@ namespace shauliTask3.Controllers
                 {
                     Session["UserID"] = usr.UserID.ToString();
                     Session["UserName"] = usr.UserName.ToString();
+                    Session["User"] = usr;
 
 
                     return RedirectToAction("LoggedIn");
