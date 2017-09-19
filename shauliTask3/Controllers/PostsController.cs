@@ -153,6 +153,12 @@ namespace shauliTask3.Controllers
         /// <summary>//////////////////////////////////////////////////////////////////
         /// ////////////////////////////////
 
+        public ActionResult Search()
+        {
+
+            return View();
+        }
+
 
         protected override void Dispose(bool disposing)
         {

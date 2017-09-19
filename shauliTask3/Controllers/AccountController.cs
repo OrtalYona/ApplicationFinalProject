@@ -174,12 +174,57 @@ namespace shauliTask3.Controllers
             return View(user);
         }
 
-        public ActionResult Search(string term)
+        //public ActionResult Search(string term)
+        //{
+
+        //    AcountModel am = new AcountModel();
+        //    return Json(am.Search(term), JsonRequestBehavior.AllowGet);
+        //}
+
+        [ActionName("Search")]
+        public ActionResult Search()
         {
 
-            AcountModel am = new AcountModel();
-            return Json(am.Search(term), JsonRequestBehavior.AllowGet);
+            return View();
+            
         }
+        [HttpPost]
+       // [ActionName("StartSearch")]
+        public ActionResult Search(string FirstName,
+    string LastName,
+    string Email,
+    string UserName)
+        {
+            using (AccountDbContext db = new AccountDbContext())
+            {
 
+
+                var accounts = from a in db.userAccounts
+                               select a;
+        
+                if (FirstName != null)
+                {
+                    accounts = accounts.Where(x => x.FirstName == FirstName);
+                }
+
+                if (LastName != null)
+                {
+                    accounts = accounts.Where(x => x.LastName == LastName);
+                }
+
+                if (Email != null)
+                {
+                    accounts = accounts.Where(x => x.Email == Email);
+                }
+
+                if (UserName != null)
+                {
+                    accounts = accounts.Where(x => x.UserName == UserName);
+                }
+
+
+                return View(accounts.OrderBy(x => x.UserID));//<----------
+            }
+        }
     }
 }

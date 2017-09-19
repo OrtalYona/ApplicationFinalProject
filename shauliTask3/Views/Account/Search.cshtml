@@ -1,69 +1,57 @@
-﻿@model IEnumerable<shauliTask3.Models.UsetAccount>
+﻿
+@model IEnumerable<shauliTask3.Models.UsetAccount>
 
 @{
     ViewBag.Title = "Search";
 }
 
-<h2>Search</h2>
+    <div class="panel">
+        @using (@Html.BeginForm("Search", "Account", FormMethod.Post))
+        {
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LastName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UserName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Password)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ComfirmPassword)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsAdmin)
-        </th>
-        <th></th>
-    </tr>
+            <div class="form-horizontal">
+                <div class="page-header">
+                    <h2>Search For Accounts</h2>
+                </div>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Password)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ComfirmPassword)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsAdmin)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.UserID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.UserID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.UserID })
-        </td>
-    </tr>
-}
+                <div class="form-group">
+                    <label class="control-label col-md-2">First Name: </label>
+                    <div class="col-md-10">
+                        @Html.TextBox("FirstName")
+                    </div>
+                </div>
 
-</table>
+                <div class="form-group">
+                    <label class="control-label col-md-2">Last Name: </label>
+                    <div class="col-md-10">
+                        @Html.TextBox("LastName")
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Email: </label>
+                    <div class="col-md-10">
+                        @Html.TextBox("Email")
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">User Name: </label>
+                    <div class="col-md-10">
+                        @Html.TextBox("UserName")
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Search" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+
+        }
+    </div>
+
+
+    
