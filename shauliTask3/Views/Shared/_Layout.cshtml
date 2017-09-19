@@ -16,10 +16,16 @@
 
     <header id="siteHeader">
         <h1>Ha-Blog Shel Shauli</h1>
+        @if (Session["UserName"] != null)
+        {
+            string uName =  @Session["UserName"].ToString();
+            <h4>Hello @Html.ActionLink(uName, "Details","Account", new { id = Session["UserID"] }, null)</h4>
+        }
     </header>
     <nav>
         <!-- Navigation -->
         <ul id="transDemo2">
+          
             <li>@Html.ActionLink("Blog", "Home", "Posts")</li>
          
             <li>@Html.ActionLink("FanClub", "Index", "Fans")</li>
@@ -27,11 +33,8 @@
             <li>@Html.ActionLink("AccountManagment", "Index", "Account")</li>
             <li>@Html.ActionLink("Register", "Register", "Account")</li>
             <li>@Html.ActionLink("LogIn", "Login", "Account")</li>
+        
 
-         <!--   <li>@Html.ActionLink("Post", "Home", "Posts")</li> -->
-
-           <!-- <li><a href="#">About</a></li> 
-            <li><a href="#">Contact</a></li>-->
             <li class="hover"><a href="#"><img src="~/images/rss.png" />Subscribe via. RSS</a></li>
         </ul>
     </nav>

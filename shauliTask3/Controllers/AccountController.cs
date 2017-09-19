@@ -10,14 +10,22 @@ using static shauliTask3.Models.UsetAccount;
 
 namespace shauliTask3.Controllers
 {
+    
     public class AccountController : Controller
     {
         // GET: Account
         public ActionResult Index()
         {
-            using (AccountDbContext db = new AccountDbContext())
+            if (Session["UserID"] != null)
             {
-                return View(db.userAccounts.ToList());
+                using (AccountDbContext db = new AccountDbContext())
+                {
+                    return View(db.userAccounts.ToList());
+                }
+            }
+            else
+            {
+                return RedirectToAction("Index");
             }
         }
         public ActionResult Register()
@@ -115,6 +123,7 @@ namespace shauliTask3.Controllers
             }
         }
 
+        [HttpGet]
         public ActionResult Details(int? id)
         {
             if (id == null)

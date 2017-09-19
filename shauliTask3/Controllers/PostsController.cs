@@ -36,11 +36,6 @@ namespace shauliTask3.Controllers
             }
             return View(posts.ToList());
         }
-
-
-
-
-
         public ActionResult Home()
         {
             
