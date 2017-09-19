@@ -156,17 +156,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201709161706099_mig.cs" />
-    <Compile Include="Migrations\201709161706099_mig.Designer.cs">
-      <DependentUpon>201709161706099_mig.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709170859477_email.cs" />
-    <Compile Include="Migrations\201709170859477_email.Designer.cs">
-      <DependentUpon>201709170859477_email.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709171144506_search.cs" />
-    <Compile Include="Migrations\201709171144506_search.Designer.cs">
-      <DependentUpon>201709171144506_search.cs</DependentUpon>
+    <Compile Include="Migrations\201709190920155_account.cs" />
+    <Compile Include="Migrations\201709190920155_account.Designer.cs">
+      <DependentUpon>201709190920155_account.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountDbContext.cs" />
@@ -176,6 +168,7 @@
     <Compile Include="Models\PostContext.cs" />
     <Compile Include="Models\UsetAccount.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Animations.css" />
@@ -268,14 +261,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201709161706099_mig.resx">
-      <DependentUpon>201709161706099_mig.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709170859477_email.resx">
-      <DependentUpon>201709170859477_email.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709171144506_search.resx">
-      <DependentUpon>201709171144506_search.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201709190920155_account.resx">
+      <DependentUpon>201709190920155_account.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
