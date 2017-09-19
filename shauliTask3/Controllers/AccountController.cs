@@ -190,10 +190,7 @@ namespace shauliTask3.Controllers
         }
         [HttpPost]
        // [ActionName("StartSearch")]
-        public ActionResult Search(string FirstName,
-    string LastName,
-    string Email,
-    string UserName)
+        public ActionResult Search(string FirstName)
         {
             using (AccountDbContext db = new AccountDbContext())
             {
@@ -206,24 +203,7 @@ namespace shauliTask3.Controllers
                 {
                     accounts = accounts.Where(x => x.FirstName == FirstName);
                 }
-
-                if (LastName != null)
-                {
-                    accounts = accounts.Where(x => x.LastName == LastName);
-                }
-
-                if (Email != null)
-                {
-                    accounts = accounts.Where(x => x.Email == Email);
-                }
-
-                if (UserName != null)
-                {
-                    accounts = accounts.Where(x => x.UserName == UserName);
-                }
-
-
-                return View(accounts.OrderBy(x => x.UserID));//<----------
+                return View(accounts.OrderBy(x => x.UserID).ToList());//<----------Here is the problem. i tried to add "to-list".
             }
         }
     }
