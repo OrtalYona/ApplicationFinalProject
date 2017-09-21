@@ -36,53 +36,31 @@ namespace shauliTask3.Controllers
             if (!String.IsNullOrEmpty(SearchTitle))
             {
                 select += "PostTitle,";
-                where += "PostTitle like '%" + SearchTitle + "%',";
+                where += "PostTitle like '%" + SearchTitle + "%'";
             }
             
-            if (!String.IsNullOrEmpty(SearchName))
+            if (!String.IsNullOrEmpty(SearchName))// should insert to here
             {
-                select += "name,";
+                select += "postWriter ,";
 
                 if (!String.IsNullOrEmpty(where))
                 {
                     where += "and ";
                 }
-                where += "name like '%" + SearchName + "%',";
+                where += "postWriter like '%" + SearchName + "%'";
             }
-
-            //select = select.Substring(0, select.Length - 1);
-
-
             if (where == "")
             {
-                query = query.Substring(0, query.Length - 10);
-            }
-            else
-            {
-                where = where.Substring(0, where.Length - 1);
+                query = query.Substring(0, query.Length - 10);// empty query
             }
 
             query = String.Format(query, where);
-
             posts = (List<Post>)db.Posts.SqlQuery(query).ToList();
-
-            //var posts = from s in db.Posts
-              //             select s;
-            //if (!String.IsNullOrEmpty(searchString))
-            //{
-            //    //posts = posts.Where(s => s.PostTitle.Contains(searchString));
-            //    posts = (IQueryable<Post>)db.Posts.SqlQuery(query);
-            //}
-
             return View(posts.ToList());
         }
         public ActionResult Home()
         {
-            
-            //return View(db.Posts.Include("comments").ToList());
             return View(db.Posts.ToList());
-
-
         }
 
         // GET: Posts/Details/5
