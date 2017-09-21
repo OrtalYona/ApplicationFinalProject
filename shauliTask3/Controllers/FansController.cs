@@ -20,6 +20,7 @@ namespace shauliTask3.Controllers
             return View(db.Fan.ToList());
         }
 
+
         // GET: Fans/Details/5
         public ActionResult Details(int? id)
         {

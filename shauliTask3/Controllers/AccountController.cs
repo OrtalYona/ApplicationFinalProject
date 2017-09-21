@@ -17,7 +17,11 @@ namespace shauliTask3.Controllers
         public ActionResult Index()
         {
             if (Session["UserID"] == null)
-                return RedirectToAction("Index");
+            {
+
+                //shuld print into a text box--> " Admin only! login before"
+                return RedirectToAction("Login");
+            }
             else if (((shauliTask3.Models.UsetAccount)Session["User"]).IsAdmin)
             {
                 using (AccountDbContext db = new AccountDbContext())
@@ -28,7 +32,7 @@ namespace shauliTask3.Controllers
             else
             {
                 return RedirectToAction("Index");
-            
+
             }
         }
         public ActionResult Register()

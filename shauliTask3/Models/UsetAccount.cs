@@ -26,7 +26,7 @@ namespace shauliTask3.Models
         [Compare("Password",ErrorMessage ="Please confirm your Password")]
         [DataType(DataType.Password)]
         public string ComfirmPassword { get; set; }
-        [DefaultValue("False")]
+        [DefaultValue("False")]// check if the problem is here
        public bool IsAdmin { get; set; }
 
         public class AcountModel
