@@ -3,7 +3,7 @@ namespace shauliTask3.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class account : DbMigration
+    public partial class accounts : DbMigration
     {
         public override void Up()
         {

@@ -62,10 +62,9 @@ namespace shauliTask3.Controllers
             return View(posts.ToList());
         }
         public ActionResult Home()
-        {
+        { 
             return View(db.Posts.ToList());
         }
-
         // GET: Posts/Details/5
         public ActionResult Details(int? id)
         {
@@ -202,5 +201,7 @@ namespace shauliTask3.Controllers
             }
             base.Dispose(disposing);
         }
+
+
     }
 }

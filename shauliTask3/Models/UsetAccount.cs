@@ -29,13 +29,6 @@ namespace shauliTask3.Models
         [DefaultValue("False")]// check if the problem is here
        public bool IsAdmin { get; set; }
 
-        public class AcountModel
-        {
-            private AccountDbContext adbc = new AccountDbContext();
-            public List<string> Search(string name)
-            {
-                return adbc.userAccounts.Where(a => a.UserName.StartsWith(name, StringComparison.OrdinalIgnoreCase)).Select(a => a.UserName).ToList();
-            }
-        }
+
     }
 }

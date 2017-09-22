@@ -17,9 +17,49 @@ namespace shauliTask3.Controllers
         // GET: Comments
         public ActionResult Index()
         {
-            var comments = db.comments.Include(c => c.post);
-            return View(comments.ToList());
+            var postComments = from s in db.comments.Include(c => c.post) select s;
+            return View(postComments.ToList());
+          //var comments = db.comments.Include(c => c.post);
+           // return View(comments.ToList());
         }
+        [HttpPost]
+        public ViewResult Index(string SearchTitle, string SearchName)
+        {
+            List<Comment> Comments;
+
+            String query = "select * from Comments where {0}";
+            string select = "";
+            string where = "";
+
+            if (!String.IsNullOrEmpty(SearchTitle))
+            {
+                select += "CommentTitle,";
+                where += "CommentTitle like '%" + SearchTitle + "%'";
+            }
+
+            if (!String.IsNullOrEmpty(SearchName))// should insert to here
+            {
+                select += "CommentWriter ,";
+
+                if (!String.IsNullOrEmpty(where))
+                {
+                    where += "and ";
+                }
+                where += "CommentWriter like '%" + SearchName + "%'";
+            }
+
+
+
+            if (where == "")
+            {
+                query = query.Substring(0, query.Length - 10);// empty query
+            }
+
+            query = String.Format(query, where);
+            Comments = (List<Comment>)db.comments.SqlQuery(query).ToList();
+            return View(Comments.ToList());
+        }
+
 
         // GET: Comments/Details/5
         public ActionResult Details(int? id)

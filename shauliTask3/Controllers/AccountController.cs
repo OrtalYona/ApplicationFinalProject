@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Data;
 using System.Web.Mvc;
 using shauliTask3.Models;
 using System.Net;
 using System.Data.Entity;
+using System.Collections;
 using static shauliTask3.Models.UsetAccount;
 
 namespace shauliTask3.Controllers
@@ -13,6 +15,7 @@ namespace shauliTask3.Controllers
     
     public class AccountController : Controller
     {
+     // private AccountDbContext db = new AccountDbContext();
         // GET: Account
         public ActionResult Index()
         {
@@ -26,8 +29,10 @@ namespace shauliTask3.Controllers
             {
                 using (AccountDbContext db = new AccountDbContext())
                 {
-                    return View(db.userAccounts.ToList());
-                }
+                    var accounts = from s in db.userAccounts select s;
+
+                    return View(accounts.ToList());
+               }
             }
             else
             {
@@ -35,6 +40,70 @@ namespace shauliTask3.Controllers
 
             }
         }
+
+        [HttpPost]
+        public ViewResult Index(string SearchFirst, string SearchLast, string SearchUser, string SearchEmail)
+        {
+            using (AccountDbContext db = new AccountDbContext())
+            {
+                List<UsetAccount> userAccounts;
+
+
+                String query = "select * from userAccounts where {0}";
+                string select = "";
+                string where = "";
+
+                if (!String.IsNullOrEmpty(SearchFirst))
+                {
+                    select += "FirstName,";
+                    where += "FirstName like '%" + SearchFirst + "%'";
+                }
+
+                if (!String.IsNullOrEmpty(SearchLast))// should insert to here
+                {
+                    select += "LastName ,";
+
+                    if (!String.IsNullOrEmpty(where))
+                    {
+                        where += "and ";
+                    }
+                    where += "LastName like '%" + SearchLast + "%'";
+                }
+
+
+                if (!String.IsNullOrEmpty(SearchUser))
+                {
+                    select += "UserName ,";
+                    if (!String.IsNullOrEmpty(where))
+                    {
+                        where += "and ";
+                    }
+                    where += "UserName like '%" + SearchUser + "%'";
+                }
+
+                if (!String.IsNullOrEmpty(SearchEmail))
+                {
+                    select += "Eamil ,";
+                    if (!String.IsNullOrEmpty(where))
+                    {
+                        where += "and ";
+                    }
+                    where += "Email like '%" + SearchEmail + "%'";
+                }
+
+                if (where == "")
+                {
+                    query = query.Substring(0, query.Length - 10);// empty query
+                }
+
+                query = String.Format(query, where);
+                userAccounts = (List<UsetAccount>)db.userAccounts.SqlQuery(query).ToList();
+                return View(userAccounts.ToList());
+            }
+        }
+
+
+
         public ActionResult Register()
         {
             return View();
@@ -168,13 +237,6 @@ namespace shauliTask3.Controllers
             }
         }
 
-
-
-
-
-
-
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "UserID,FirstName,LastName,Email,UserName,Password,ComfirmPassword")] UsetAccount user)
@@ -191,57 +253,5 @@ namespace shauliTask3.Controllers
             return View(user);
         }
 
-        /*public ActionResult Search(string term)
-        {
-
-            AcountModel am = new AcountModel();
-            return Json(am.Search(term), JsonRequestBehavior.AllowGet);
-        }*/
-
-        [ActionName("Search")]
-        public ActionResult Search()
-        {
-
-            return View();
-
-        }
-        [HttpPost]
-       // [ActionName("StartSearch")]
-        public ActionResult Search(string FirstName,
-    string LastName,
-    string Email,
-    string UserName)
-        {
-            using (AccountDbContext db = new AccountDbContext())
-            {
-
-
-                var accounts = from a in db.userAccounts
-                               select a;
-        
-                if (FirstName != null)
-                {
-                    accounts = accounts.Where(x => x.FirstName == FirstName);
-                }
-
-                if (LastName != null)
-                {
-                    accounts = accounts.Where(x => x.LastName == LastName);
-                }
-
-                if (Email != null)
-                {
-                    accounts = accounts.Where(x => x.Email == Email);
-                }
-
-                if (UserName != null)
-                {
-                    accounts = accounts.Where(x => x.UserName == UserName);
-                }
-
-
-                return View(accounts.OrderBy(x => x.UserID));//<----------
-            }
-        }
     }
 }
