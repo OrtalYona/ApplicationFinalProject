@@ -25,7 +25,7 @@ namespace shauliTask3.Controllers
         }
 
         [HttpPost]
-        public ViewResult Index( string SearchTitle, String SearchName)
+        public ViewResult Index( string SearchTitle, string SearchName)
         {
             List<Post> posts;
 
@@ -49,6 +49,9 @@ namespace shauliTask3.Controllers
                 }
                 where += "postWriter like '%" + SearchName + "%'";
             }
+
+
+
             if (where == "")
             {
                 query = query.Substring(0, query.Length - 10);// empty query

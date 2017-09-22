@@ -6,6 +6,29 @@
 
 <h2>FANS</h2>
 
+@using (Html.BeginForm())
+{
+
+    <h4>
+        Find By First Name:
+    </h4>
+    @Html.TextBox("SearchFirst")
+
+    <h4>
+        Find By Last Name:
+    </h4>
+    @Html.TextBox("SearchLast")
+    <h4>
+        Find By Gender:
+    </h4>
+    @Html.TextBox("SearchGender")
+
+    <input type="submit" value="Search" />
+
+}
+
+    
+
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>

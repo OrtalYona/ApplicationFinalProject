@@ -17,7 +17,56 @@ namespace shauliTask3.Controllers
         // GET: Fans
         public ActionResult Index()
         {
-            return View(db.Fan.ToList());
+            var fans = from s in db.Fan select s;
+
+            return View(fans.ToList());
+         //   return View(db.Fan.ToList());
+        }
+
+        [HttpPost]
+        public ViewResult Index(string SearchFirst, string SearchLast, string SearchGender)
+        {
+            List<Fan> fans;
+
+            String query = "select * from fans where {0}";
+            string select = "";
+            string where = "";
+
+            if (!String.IsNullOrEmpty(SearchFirst))
+            {
+                select += "FirstName,";
+                where += "FirstName like '%" + SearchFirst + "%'";
+            }
+
+            if (!String.IsNullOrEmpty(SearchLast))// should insert to here
+            {
+                select += "LastName ,";
+
+                if (!String.IsNullOrEmpty(where))
+                {
+                    where += "and ";
+                }
+                where += "LastName like '%" + SearchLast + "%'";
+            }
+
+
+            if (!String.IsNullOrEmpty(SearchGender))
+            {
+                select += "sex ,";
+                if (!String.IsNullOrEmpty(where))
+                {
+                    where += "and ";
+                }
+                where += "sex like '%" + SearchGender + "%'";
+            }
+            if (where == "")
+            {
+                query = query.Substring(0, query.Length - 10);// empty query
+            }
+
+            query = String.Format(query, where);
+            fans = (List<Fan>)db.Fan.SqlQuery(query).ToList();
+            return View(fans.ToList());
         }
 
 
