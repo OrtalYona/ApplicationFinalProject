@@ -10,7 +10,7 @@ namespace shauliTask3.Models
     public class UsetAccount
     {
         [Key]
-        public int UserID { get; set; }
+        public int UserId { get; set; }
         [Required(ErrorMessage ="First name is requierd")]
         public string FirstName { get; set; }
         [Required(ErrorMessage = "Last name is requierd")]
@@ -26,7 +26,7 @@ namespace shauliTask3.Models
         [Compare("Password",ErrorMessage ="Please confirm your Password")]
         [DataType(DataType.Password)]
         public string ComfirmPassword { get; set; }
-        [DefaultValue("False")]// check if the problem is here
+        //[DefaultValue("False")]// check if the problem is here
        public bool IsAdmin { get; set; }
 
 

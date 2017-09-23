@@ -24,20 +24,24 @@
             {
                 <h4> Admin</h4>
             }
+            @Html.ActionLink("LogOut", "LogOut", "Account");
+         
         }
+
+
+
     </header>
     <nav>
         <!-- Navigation -->
         <ul id="transDemo2">
           
             <li>@Html.ActionLink("Blog", "Home", "Posts")</li>
-         
             <li>@Html.ActionLink("FanClub", "Index", "Fans")</li>
             <li>@Html.ActionLink("BlogManagment", "Index", "Posts")</li>
             <li>@Html.ActionLink("AccountManagment", "Index", "Account")</li>
             <li>@Html.ActionLink("Register", "Register", "Account")</li>
             <li>@Html.ActionLink("LogIn", "Login", "Account")</li>
-        
+
 
             <li class="hover"><a href="#"><img src="~/images/rss.png" />Subscribe via. RSS</a></li>
         </ul>

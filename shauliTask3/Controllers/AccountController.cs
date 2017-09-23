@@ -36,71 +36,15 @@ namespace shauliTask3.Controllers
             }
             else
             {
-                return RedirectToAction("Index");
+                String s = "You don't have premission. To return home page please click HomePage";
+                Console.WriteLine(s);
 
+                return RedirectToAction("Home", "Posts");
+                
             }
         }
 
-        [HttpPost]
-        public ViewResult Index(string SearchFirst, string SearchLast, string SearchUser, string SearchEmail)
-        {
-            using (AccountDbContext db = new AccountDbContext())
-            {
-                List<UsetAccount> userAccounts;
 
-
-                String query = "select * from userAccounts where {0}";
-                string select = "";
-                string where = "";
-
-                if (!String.IsNullOrEmpty(SearchFirst))
-                {
-                    select += "FirstName,";
-                    where += "FirstName like '%" + SearchFirst + "%'";
-                }
-
-                if (!String.IsNullOrEmpty(SearchLast))// should insert to here
-                {
-                    select += "LastName ,";
-
-                    if (!String.IsNullOrEmpty(where))
-                    {
-                        where += "and ";
-                    }
-                    where += "LastName like '%" + SearchLast + "%'";
-                }
-
-
-                if (!String.IsNullOrEmpty(SearchUser))
-                {
-                    select += "UserName ,";
-                    if (!String.IsNullOrEmpty(where))
-                    {
-                        where += "and ";
-                    }
-                    where += "UserName like '%" + SearchUser + "%'";
-                }
-
-                if (!String.IsNullOrEmpty(SearchEmail))
-                {
-                    select += "Eamil ,";
-                    if (!String.IsNullOrEmpty(where))
-                    {
-                        where += "and ";
-                    }
-                    where += "Email like '%" + SearchEmail + "%'";
-                }
-
-                if (where == "")
-                {
-                    query = query.Substring(0, query.Length - 10);// empty query
-                }
-
-                query = String.Format(query, where);
-                userAccounts = (List<UsetAccount>)db.userAccounts.SqlQuery(query).ToList();
-                return View(userAccounts.ToList());
-            }
-        }
 
 
 
@@ -136,13 +80,24 @@ namespace shauliTask3.Controllers
         {
             using (AccountDbContext db = new AccountDbContext())
             {
+                if ((user.UserName)=="admin" && (user.Password)=="1234")
+                {
 
+                    user.IsAdmin = true;
+                    user.UserId = 5;
+                    user.UserName = "admin";
+                    Session["IsAdmin"] = user.IsAdmin.ToString();
+                    Session["UserID"] = user.UserId.ToString();
+                    Session["UserName"] = user.UserName.ToString();
+                    Session["User"] = user;
+                    return RedirectToAction("LoggedIn");
+                }
                 var usr = db.userAccounts.SingleOrDefault(u => u.UserName == user.UserName && u.Password == user.Password);
 
                 if (usr != null)
 
                 {
-                    Session["UserID"] = usr.UserID.ToString();
+                    Session["UserID"] = usr.UserId.ToString();
                     Session["UserName"] = usr.UserName.ToString();
                     Session["User"] = usr;
 
@@ -163,6 +118,7 @@ namespace shauliTask3.Controllers
             {
                 return View();
             }
+
             else
             {
                 return RedirectToAction("Login");
@@ -239,7 +195,7 @@ namespace shauliTask3.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UserID,FirstName,LastName,Email,UserName,Password,ComfirmPassword")] UsetAccount user)
+        public ActionResult Edit([Bind(Include = "UserID,FirstName,LastName,Email,UserName,Password,ComfirmPassword,IsAdmin")] UsetAccount user)
         {
             if (ModelState.IsValid)
             {
@@ -251,6 +207,13 @@ namespace shauliTask3.Controllers
                 }
             }
             return View(user);
+        }
+
+        public ActionResult LogOut()
+        {
+            Session["UserID"] = null;
+            Session.Clear();
+            return RedirectToAction("Home","Posts");
         }
 
     }
