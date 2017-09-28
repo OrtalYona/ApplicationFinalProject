@@ -201,10 +201,21 @@ namespace shauliTask3.Controllers
             }
             return View(post.comments.ToList());
         }
-        /// <summary>//////////////////////////////////////////////////////////////////
-        /// ////////////////////////////////
 
 
+        public ActionResult Statistics()/////////////////////////////////////////////////
+        {
+            List<Post> posts;
+            string a = "ortal";
+            String query = "select * from posts groupby {0}";
+            string select = "postWriter";
+            string groupby = "postTitle";
+
+            query = String.Format(query, groupby);
+            posts = (List<Post>)db.Posts.SqlQuery(query).ToList();
+            return View(posts.ToList());
+
+        }
 
 
 

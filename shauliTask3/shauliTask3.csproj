@@ -164,8 +164,13 @@
     <Compile Include="Migrations\201709230759575_admin.Designer.cs">
       <DependentUpon>201709230759575_admin.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709280848232_statistics.cs" />
+    <Compile Include="Migrations\201709280848232_statistics.Designer.cs">
+      <DependentUpon>201709280848232_statistics.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountDbContext.cs" />
+    <Compile Include="Models\AccountStatisticsResult.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Fan.cs" />
     <Compile Include="Models\Post.cs" />
@@ -179,6 +184,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Fonts.css" />
     <Content Include="Content\mycss.css" />
+    <Content Include="Content\sequences.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -209,6 +215,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\statistics.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -246,6 +253,7 @@
     <Content Include="Views\Account\Delete.cshtml" />
     <Content Include="Views\Account\Details.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />
+    <Content Include="Views\Posts\Statistics.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -270,6 +278,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709230759575_admin.resx">
       <DependentUpon>201709230759575_admin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709280848232_statistics.resx">
+      <DependentUpon>201709280848232_statistics.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
