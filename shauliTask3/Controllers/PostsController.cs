@@ -203,7 +203,7 @@ namespace shauliTask3.Controllers
         }
 
 
-        public ActionResult Statistics()/////////////////////////////////////////////////
+        public ActionResult Statistics()////////////////////////////////////////
         {
             List<Post> posts;
             string a = "ortal";
