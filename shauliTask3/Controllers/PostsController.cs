@@ -19,13 +19,14 @@ namespace shauliTask3.Controllers
         ///
         public ActionResult Index()
         {
-            var posts= from s in db.Posts select s;
+            var posts = from s in db.Posts select s;
 
             return View(posts.ToList());
         }
+        
 
         [HttpPost]
-        public ViewResult Index( string SearchTitle, string SearchName)
+        public ViewResult Index(string SearchTitle, string SearchName)
         {
             List<Post> posts;
 
@@ -38,7 +39,6 @@ namespace shauliTask3.Controllers
                 select += "PostTitle,";
                 where += "PostTitle like '%" + SearchTitle + "%'";
             }
-            
             if (!String.IsNullOrEmpty(SearchName))// should insert to here
             {
                 select += "postWriter ,";
@@ -49,18 +49,31 @@ namespace shauliTask3.Controllers
                 }
                 where += "postWriter like '%" + SearchName + "%'";
             }
-
-
-
             if (where == "")
             {
                 query = query.Substring(0, query.Length - 10);// empty query
             }
-
             query = String.Format(query, where);
             posts = (List<Post>)db.Posts.SqlQuery(query).ToList();
             return View(posts.ToList());
         }
+
+        //group by query
+        public ViewResult Index2()
+        {
+            var query =
+                from i in db.Posts
+                group i by i.postWriter into g
+                select new { PostWriter = g.Key, num = g};
+
+            return View(query.ToList());
+        }
+
+
+
+
+
+
         public ActionResult Home()
         { 
             return View(db.Posts.ToList());

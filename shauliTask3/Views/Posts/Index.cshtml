@@ -61,6 +61,61 @@
                 }
 
             </table>
+
+
+
+
+
+<h3>Number of posts by writer:</h3>
+
+<table class="table">
+    
+
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.postWriter)
+
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.PostTitle)
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.postWriter)
+             
+            </td>
+
+            <td>
+              @Html.DisplayFor(modelItem => item.PostTitle)
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             <p>
                 @Html.ActionLink("Add New Post", "Create")
             </p>
