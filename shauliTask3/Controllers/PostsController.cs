@@ -50,8 +50,6 @@ namespace shauliTask3.Controllers
                 where += "postWriter like '%" + SearchName + "%'";
             }
 
-
-
             if (where == "")
             {
                 query = query.Substring(0, query.Length - 10);// empty query
