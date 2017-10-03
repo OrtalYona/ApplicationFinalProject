@@ -262,7 +262,7 @@ namespace shauliTask3.Controllers
 
         }
         public ActionResult Join()
-        {//ortal
+        {//ortalkkkkkkkkkkk
 
             var query = from d in db.Posts
                          join j in db.comments on d.PostID equals j.PostID
