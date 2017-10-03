@@ -255,7 +255,7 @@ namespace shauliTask3.Controllers
             //var itemOrders =
             //    from p in _postList
             //    join c in _commentList on p.PostID equals c.PostID
-            //    select new { p.subjectPost, c.subjectComment };
+            //    select new { p.subjectPost, c.subjectComment };jhkj
 
             //return View(itemOrders.ToList());
 
