@@ -66,39 +66,35 @@ namespace shauliTask3.Controllers
 
 
 
-
-
-
-
         public ActionResult Home()
         {
             
           //  Maps mofo = null;
-            List<Maps> mofo = new List<Maps>();
-            foreach (var m in maps.Map)
-            {
-                mofo.Add(m);
-                //  break;
-            }
+            //List<Maps> mofo = new List<Maps>();
+            //foreach (var m in maps.Map)
+            //{
+            //    mofo.Add(m);
+            //    //  break;
+            //}
 
-            if (mofo != null)
-            {
+            //if (mofo != null)
+            //{
                 
-                foreach (var m in maps.Map)
-                {
+            //    foreach (var m in maps.Map)
+            //    {
                    
-                    ViewBag.Latitude = mofo.First().Latitude;
-                    ViewBag.Longtitude = mofo.First().Longitude;
-                    //  ViewBag.Latitude = mofo.Latitude;
-                    //   ViewBag.Longtitude = mofo.Longitude;
-                }
+            //        ViewBag.Latitude = mofo.First().Latitude;
+            //        ViewBag.Longtitude = mofo.First().Longitude;
+            //        //  ViewBag.Latitude = mofo.Latitude;
+            //        //   ViewBag.Longtitude = mofo.Longitude;
+            //    }
 
-            }
-            else
-            {
-                ViewBag.Latitude = 51.122;
-                ViewBag.Longtitude = 0;
-            }
+            //}
+            //else
+            //{
+            //    ViewBag.Latitude = 51.122;
+            //    ViewBag.Longtitude = 0;
+            //}
             using (PostContext db=new PostContext())
             {
                 ViewBag.TotalPosts = db.Posts.Count();

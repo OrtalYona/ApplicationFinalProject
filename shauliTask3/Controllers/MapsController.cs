@@ -123,5 +123,13 @@ namespace shauliTask3.Controllers
             }
             base.Dispose(disposing);
         }
+
+        [HttpGet]
+        public ActionResult GetCordinates()
+        {
+             MapsDbContext maps = new MapsDbContext();
+
+            return Json(maps.Map.ToList(), JsonRequestBehavior.AllowGet);
+        }
     }
 }
