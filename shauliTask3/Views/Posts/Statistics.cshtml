@@ -1,33 +1,22 @@
-﻿@model IEnumerable<dynamic>
-@using System.Reflection;
+﻿@model IEnumerable<shauliTask3.Models.Post>
+
 
 
 <table class="table">
     <tr>
         <th>
-           Writer Name
-        </th>
-        <th>
-            posts
+            @Html.DisplayNameFor(model => model.postWriter)
         </th>
 
     </tr>
 
-@foreach (dynamic d in Model)
-{
-    var postWriter = d.GetType().GetProperty("PostWriter").GetValue(d);
-    var count = d.GetType().GetProperty("c").GetValue(d);
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PostTitle)
+        </td>
 
-        <tr>
-            <td>
-                @postWriter
-            </td>
-            <td>
-                @count
-            </td>
-
-        </tr>
+    </tr>
 }
+
 </table>
-
-

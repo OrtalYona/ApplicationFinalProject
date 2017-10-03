@@ -7,7 +7,6 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using shauliTask3.Models;
-using System.Dynamic;
 
 namespace shauliTask3.Controllers
 {
@@ -62,6 +61,16 @@ namespace shauliTask3.Controllers
             return View(posts.ToList());
         }
 
+        //group by query
+        public ViewResult Index2()
+        {
+            var query =
+                from i in db.Posts
+                group i by i.postWriter into g
+                select new { PostWriter = g.Key, num = g};
+
+            return View(query.ToList());
+        }
 
 
 
@@ -237,45 +246,21 @@ namespace shauliTask3.Controllers
         /// <summary>//////////////////////////////////////////////////////////////////
         /// /////////////////////////////
 
-        //here we need the group by
-        public ActionResult Statistics()
-        {
-           // List<Post> posts = db.Posts.ToList();
-         //   List<Comment> comments = db.comments.ToList();
 
+        public ActionResult Statistics()////////////////////////////////////
+        {
 
             var query = from i in db.Posts
                         group i by i.postWriter into g
                         select new { PostWriter = g.Key, c=g.Count() };
+
             return View(query.ToList());
-
-            //List<Post> _postList = db.Post.ToList();
-            //List<Comment> _commentList = db.Comment.ToList();
-
-            //var itemOrders =
-            //    from p in _postList
-            //    join c in _commentList on p.PostID equals c.PostID
-            //    select new { p.subjectPost, c.subjectComment };
-
-        public ActionResult Statistics()////////////////////////////////////////
-        {
-            List<Post> posts;
-            string a = "ortal";
-            String query = "select * from posts groupby {0}";
-            string select = "postWriter";
-            string groupby = "postTitle";
-
-
-        }
-        public ActionResult Join()
-        {
+      
 
             var query = from d in db.Posts
                          join j in db.comments on d.PostID equals j.PostID
                          select new { d.PostTitle, j.CommentTitle };
 
-
-            return View(query.ToList());
         }
 
         protected override void Dispose(bool disposing)
