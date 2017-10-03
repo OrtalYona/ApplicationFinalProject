@@ -88,14 +88,19 @@
 
 <div class="row">
     <div class="col-md-3">
-        <script>
+
+        @*<script>
             (function (d, s, id) {
                 var js, fjs = d.getElementsByTagName(s)[0];
                 if (d.getElementById(id)) return;
                 js = d.createElement(s); js.id = id;
                 js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6";
                 fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));</script>
+            }(document, 'script', 'facebook-jssdk'));</script>*@
+        <script src="~/Scripts/facebook.js">
+        </script>
+
+
 
         <div>
             <div id="fb-root"></div>
@@ -138,8 +143,12 @@
         <p id="temp" color="white" style="font-size: 14px;color:black;"></p>
         <p id="humidity" color="white" style="font-size: 14px;color:black;"></p>
         <button class="btn btn-primary">Get Weather</button>
+        <script src="~/Scripts/weather.js">
+        </script>
 
-        <script>
+
+
+        @*<script>
             var appid = "2e9a3b3f3b7a98e0442e3a85875a2481";
             $(document).ready(function () {
                 $("button").click(function () {
@@ -153,7 +162,9 @@
                 });
             });
 
-        </script>
+        </script>*@
+       
+
     </div>
 </div>
 
