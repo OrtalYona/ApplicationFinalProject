@@ -83,9 +83,10 @@ namespace shauliTask3.Controllers
 
             if (mofo != null)
             {
+                
                 foreach (var m in maps.Map)
                 {
-                    
+                   
                     ViewBag.Latitude = mofo.First().Latitude;
                     ViewBag.Longtitude = mofo.First().Longitude;
                     //  ViewBag.Latitude = mofo.Latitude;
