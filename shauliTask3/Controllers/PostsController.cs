@@ -240,7 +240,7 @@ namespace shauliTask3.Controllers
         //here we need the group by
         public ActionResult Statistics()
         {
-           // List<Post> posts = db.Posts.ToList();
+           // List<Post> posts = db.Posts.ToList();////////////////////////
          //   List<Comment> comments = db.comments.ToList();
 
 
