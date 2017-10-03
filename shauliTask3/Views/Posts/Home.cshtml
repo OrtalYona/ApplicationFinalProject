@@ -38,7 +38,7 @@
  
                  @foreach (var com in item.comments)
                  {
-
+         
             <article>
                 <p>
                     @Html.DisplayFor(modeItem => com.CommentTitle) 
@@ -83,94 +83,7 @@
 
 
 
-    }
-
-
-<div class="row">
-    <div class="col-md-3">
-        <script>
-            (function (d, s, id) {
-                var js, fjs = d.getElementsByTagName(s)[0];
-                if (d.getElementById(id)) return;
-                js = d.createElement(s); js.id = id;
-                js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6";
-                fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));</script>
-
-        <div>
-            <div id="fb-root"></div>
-
-            <div class="fb-page" data-href="https://www.facebook.com/Llamada-228666157643675/" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"></div>
-        </div>
-    </div>
-    <div class="col-md-5">
-
-        <div id="googleMap" style="width:500px;height:214px;"></div>
-        <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBm7ix58u74BADoNhaRfWKZ4MDADQGA95k&sensor=TRUE"></script>
-        <script>
-            function loadScript() {
-                var script = document.createElement("script");
-                script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBm7ix58u74BADoNhaRfWKZ4MDADQGA95k&sensor=false&callback=initialize";
-                var mapProp = { center: new google.maps.LatLng(@ViewBag.Latitude, @ViewBag.Longtitude), zoom: 6, mapTypeId: google.maps.MapTypeId.HYBRID };
-                var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
-
-                
-                    var marker = new google.maps.Marker({
-                    position:  new google.maps.LatLng(@ViewBag.Latitude, @ViewBag.Longtitude),
-                    title: "Hello World!"
-                });
-                // To add the marker to the map, call setMap();
-                   marker.setMap(map);
-
-
-
-
-                document.body.appendChild(script);
-            }
-            window.onload = loadScript;
-
-
-        </script>
-    </div>
-    <div class="col-md-1"></div>
-    <div class="col-md-3">
-        <p id="name" style="font-size: 18px;color:black;"></p>
-        <p id="temp" color="white" style="font-size: 14px;color:black;"></p>
-        <p id="humidity" color="white" style="font-size: 14px;color:black;"></p>
-        <button class="btn btn-primary">Get Weather</button>
-
-        <script>
-            var appid = "2e9a3b3f3b7a98e0442e3a85875a2481";
-            $(document).ready(function () {
-                $("button").click(function () {
-                    $.get("http://api.openweathermap.org/data/2.5/weather?q=TelAviv&units=metric&APPID=" + appid + "&units=imperial", function (response) {
-                        //response
-                        console.log(response);
-                        $("#name").text(response.name);
-                        $("#temp").text(response.main.temp);
-                        $("#humidity").text(response.main.humidity);
-                    });
-                });
-            });
-
-        </script>
-    </div>
-</div>
-
-
-<a class="navbar-brand">
-    <h3> Statistics</h3>
-</a>
-
-To see how many posts each user have @Html.ActionLink("click here ", "Statistics")
-<p class="navbar-text">
-    There are a total of <b>@ViewBag.TotalComments Comments</b>
-    & <b>@ViewBag.TotalPosts Posts</b>
-    & <b>@ViewBag.TotalFans Fans</b>
-    & <b>@ViewBag.TotalAccounts Users</b>
-    in this community.
-</p>
-</nav>
+}
 
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
