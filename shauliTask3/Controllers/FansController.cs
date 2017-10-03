@@ -13,7 +13,7 @@ namespace shauliTask3.Controllers
     public class FansController : Controller
     {
         private FanDBContext db = new FanDBContext();
-
+        //testtefdsfvdsfv
         // GET: Fans
         public ActionResult Index()
         {
