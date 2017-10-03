@@ -50,8 +50,6 @@ namespace shauliTask3.Controllers
                 where += "postWriter like '%" + SearchName + "%'";
             }
 
-
-
             if (where == "")
             {
                 query = query.Substring(0, query.Length - 10);// empty query
@@ -201,9 +199,11 @@ namespace shauliTask3.Controllers
             }
             return View(post.comments.ToList());
         }
+        /// <summary>//////////////////////////////////////////////////////////////////
+        /// /////////////////////////////
 
 
-        public ActionResult Statistics()////////////////////////////////////
+        public ActionResult Statistics()////////////////////////////////////////
         {
             List<Post> posts;
             string a = "ortal";
