@@ -7,13 +7,13 @@ namespace shauliTask3.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class admin : IMigrationMetadata
+    public sealed partial class map : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(admin));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(map));
         
         string IMigrationMetadata.Id
         {
-            get { return "201709230759575_admin"; }
+            get { return "201710021120353_map"; }
         }
         
         string IMigrationMetadata.Source

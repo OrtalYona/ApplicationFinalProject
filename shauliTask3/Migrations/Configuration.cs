@@ -5,14 +5,14 @@ namespace shauliTask3.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<shauliTask3.Models.AccountDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<shauliTask3.Models.MapsDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(shauliTask3.Models.AccountDbContext context)
+        protected override void Seed(shauliTask3.Models.MapsDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 
