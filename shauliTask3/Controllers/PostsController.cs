@@ -13,8 +13,6 @@ namespace shauliTask3.Controllers
     public class PostsController : Controller
     {
         private PostContext db = new PostContext();
-        private MapsDbContext maps = new MapsDbContext();
-
 
 
         // GET: Posts
@@ -78,49 +76,7 @@ namespace shauliTask3.Controllers
 
 
         public ActionResult Home()
-        {
-            
-          //  Maps mofo = null;
-            List<Maps> mofo = new List<Maps>();
-            foreach (var m in maps.Map)
-            {
-                mofo.Add(m);
-                //  break;
-            }
-
-            if (mofo != null)
-            {
-                foreach (var m in maps.Map)
-                {
-                    
-                    ViewBag.Latitude = mofo.First().Latitude;
-                    ViewBag.Longtitude = mofo.First().Longitude;
-                    //  ViewBag.Latitude = mofo.Latitude;
-                    //   ViewBag.Longtitude = mofo.Longitude;
-                }
-
-            }
-            else
-            {
-                ViewBag.Latitude = 51.122;
-                ViewBag.Longtitude = 0;
-            }
-            using (PostContext db=new PostContext())
-            {
-                ViewBag.TotalPosts = db.Posts.Count();
-                ViewBag.TotalComments = db.comments.Count();
-            }
-            using (AccountDbContext db1 = new AccountDbContext())
-            {
-                ViewBag.TotalAccounts = db1.userAccounts.Count();
-
-            }
-            using (FanDBContext db2 = new FanDBContext())
-            {
-                ViewBag.TotalFans = db2.Fan.Count();
-
-            }
-
+        { 
             return View(db.Posts.ToList());
         }
         // GET: Posts/Details/5
