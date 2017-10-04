@@ -10,16 +10,12 @@ using shauliTask3.Models;
 using System.Dynamic;
 
 namespace shauliTask3.Controllers
-{//hfhf
+{
     public class PostsController : Controller
     {
         private PostContext db = new PostContext();
         private MapsDbContext maps = new MapsDbContext();
 
-
-
-        // GET: Posts
-        ///
         public ActionResult Index()
         {
             var posts = from s in db.Posts select s;
@@ -42,7 +38,7 @@ namespace shauliTask3.Controllers
                 select += "PostTitle,";
                 where += "PostTitle like '%" + SearchTitle + "%'";
             }
-            if (!String.IsNullOrEmpty(SearchName))// should insert to here
+            if (!String.IsNullOrEmpty(SearchName))
             {
                 select += "postWriter ,";
 
@@ -53,11 +49,9 @@ namespace shauliTask3.Controllers
                 where += "postWriter like '%" + SearchName + "%'";
             }
 
-
-
             if (where == "")
             {
-                query = query.Substring(0, query.Length - 10);// empty query
+                query = query.Substring(0, query.Length - 10);
             }
             query = String.Format(query, where);
             posts = (List<Post>)db.Posts.SqlQuery(query).ToList();
@@ -65,36 +59,8 @@ namespace shauliTask3.Controllers
         }
 
 
-
         public ActionResult Home()
         {
-            
-          //  Maps mofo = null;
-            //List<Maps> mofo = new List<Maps>();
-            //foreach (var m in maps.Map)
-            //{
-            //    mofo.Add(m);
-            //    //  break;
-            //}
-
-            //if (mofo != null)
-            //{
-                
-            //    foreach (var m in maps.Map)
-            //    {
-                   
-            //        ViewBag.Latitude = mofo.First().Latitude;
-            //        ViewBag.Longtitude = mofo.First().Longitude;
-            //        //  ViewBag.Latitude = mofo.Latitude;
-            //        //   ViewBag.Longtitude = mofo.Longitude;
-            //    }
-
-            //}
-            //else
-            //{
-            //    ViewBag.Latitude = 51.122;
-            //    ViewBag.Longtitude = 0;
-            //}
             using (PostContext db=new PostContext())
             {
                 ViewBag.TotalPosts = db.Posts.Count();
@@ -113,7 +79,6 @@ namespace shauliTask3.Controllers
 
             return View(db.Posts.ToList());
         }
-        // GET: Posts/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -128,7 +93,6 @@ namespace shauliTask3.Controllers
             return View(post);
         }
 
-        // GET: Posts/Create
         public ActionResult Create()
         {
             return View();
@@ -146,8 +110,6 @@ namespace shauliTask3.Controllers
                 post.counter = 0;
                 post.date = DateTime.Now;
                 db.Posts.Add(post);
-               // ViewBag.PostID = post.comments;
-                //////////////////////////////////////////
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -180,15 +142,12 @@ namespace shauliTask3.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(post).State = EntityState.Modified;
-               // db.Entry(post).Property("counter").IsModified = false;//////////////////////////////////////////////
-
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(post);
         }
 
-        // GET: Posts/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -203,23 +162,17 @@ namespace shauliTask3.Controllers
             return View(post);
         }
 
-        // POST: Posts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             bool isAdmin = (Boolean)Session["isAmdin"];
-
-            
-
             Post post = db.Posts.Find(id);
             db.Posts.Remove(post);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-        /// <summary>
-        /// ///////////////////////
-     
+
         public ActionResult Comments(int? id)
         {
             if (id == null)
@@ -234,40 +187,35 @@ namespace shauliTask3.Controllers
             return View(post.comments.ToList());
         }
 
-        //here we need the group by
         public ActionResult Statistics()
         {
-           // List<Post> posts = db.Posts.ToList();////////////////////////
-         //   List<Comment> comments = db.comments.ToList();
-
-
             var query = from i in db.Posts
                         group i by i.postWriter into g
                         select new { PostWriter = g.Key, c=g.Count() };
+
             return View(query.ToList());
-
-            //List<Post> _postList = db.Post.ToList();
-            //List<Comment> _commentList = db.Comment.ToList();
-
-            //var itemOrders =
-            //    from p in _postList
-            //    join c in _commentList on p.PostID equals c.PostID
-            //    select new { p.subjectPost, c.subjectComment };jhkj
-
-            //return View(itemOrders.ToList());
-
-
         }
+
         public ActionResult Join()
-        {//ortalkkkkkkkkkkk1111111
+        {
 
             var query = from d in db.Posts
                          join j in db.comments on d.PostID equals j.PostID
                          select new { d.PostTitle, j.CommentTitle };
 
+            return View(query.ToList());
+        }
+
+        public ActionResult JoinAccountPost()//fix!
+        {
+            AccountDbContext dbuser = new AccountDbContext();
+            var query = from d in db.Posts
+                        join u in dbuser.userAccounts on d.postWriter equals u.UserName
+                        select new { d.PostTitle, u.UserName };
 
             return View(query.ToList());
         }
+
 
         protected override void Dispose(bool disposing)
         {

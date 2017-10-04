@@ -4,8 +4,6 @@
 
 
     <title>Browser Page title</title>
-  <!--  <link href="~/Content/Fonts.css" rel="stylesheet" />
-    <link href="~/Content/Animations.css" rel="stylesheet" />-->
     <link rel="stylesheet" href="~/Content/Site.css" type="text/css" media="screen" />
 </head>
 
@@ -92,42 +90,6 @@
             </section>
 
 
-            <section>
-                <h3>Community locations</h3>
-                <ul>
-
-                    <!DOCTYPE html>
-                    <html>
-                    <head>
-                        <style>
-                            #map {
-                                height: 300px;
-                                width: 100%;
-                            }
-                        </style>
-                    </head>
-                    <body>
-                        <div id="map"></div>
-                        @*<script>
-      function initMap() {
-       var startMap = {lat: -25.363, lng: 131.044};
-       var map = new google.maps.Map(document.getElementById('map'), { zoom: 4, center: startMap});
-       var marker = new google.maps.Marker({ position: startMap, map: map });
-       var marker = new google.maps.Marker({ position: { lat: -25.363, lng: 151.044 }, map: map });
-
-
-      }
-                        </script>
-                        <script async defer
-                                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRchDroNLe-ud1nMkDSYOb8gmUrB_LJUM&callback=initMap">
-                        </script>*@
-                    </body>
-                </html>
-     
-                </ul>
-
-</section>
-
         </aside>
     </div>
 
@@ -186,17 +148,6 @@
 </body>
 </html>
 
-
-    
-
-
-
-
-
-
-
-
-
 <div class="row">
     <div class="col-md-3">
         <script>
@@ -211,25 +162,15 @@
         <div>
             <div id="fb-root"></div>
 
-            <div class="fb-page" data-href="https://www.facebook.com/Llamada-228666157643675/" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"></div>
+          
         </div>
     </div>
-    @*<div class="col-md-5">
-
-        <div id="googleMap" style="width:500px;height:214px;"></div>
-        <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBm7ix58u74BADoNhaRfWKZ4MDADQGA95k&sensor=TRUE"></script>
-        <script>
-            function loadScript() {
-                var script = document.createElement("script");
-                script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBm7ix58u74BADoNhaRfWKZ4MDADQGA95k&sensor=false&callback=initialize";
-                var mapProp = { center: new google.maps.LatLng(@ViewBag.Latitude, @ViewBag.Longtitude), zoom: 6, mapTypeId: google.maps.MapTypeId.HYBRID };
-                var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
-                document.body.appendChild(script);
-            }
-            window.onload = loadScript;
-        </script>
-    </div>*@
-    
+    <style>
+        #map {
+            height: 300px;
+            width: 100%;
+        }
+    </style>
     <div class="col-md-1"></div>
     <div class="col-md-3">
         <p id="name" style="font-size: 18px;color:white;"></p>
@@ -255,4 +196,3 @@
     </div>
 </div>
 
-<!------------------------------------------------------------------------------------------!>

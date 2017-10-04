@@ -19,9 +19,8 @@ namespace shauliTask3.Controllers
         {
             var postComments = from s in db.comments.Include(c => c.post) select s;
             return View(postComments.ToList());
-          //var comments = db.comments.Include(c => c.post);
-           // return View(comments.ToList());
         }
+
         [HttpPost]
         public ViewResult Index(string SearchTitle, string SearchName)
         {
@@ -37,7 +36,7 @@ namespace shauliTask3.Controllers
                 where += "CommentTitle like '%" + SearchTitle + "%'";
             }
 
-            if (!String.IsNullOrEmpty(SearchName))// should insert to here
+            if (!String.IsNullOrEmpty(SearchName))
             {
                 select += "CommentWriter ,";
 
@@ -52,7 +51,7 @@ namespace shauliTask3.Controllers
 
             if (where == "")
             {
-                query = query.Substring(0, query.Length - 10);// empty query
+                query = query.Substring(0, query.Length - 10);
             }
 
             query = String.Format(query, where);
@@ -75,11 +74,7 @@ namespace shauliTask3.Controllers
             }
             return View(comment);
         }
-        /// <summary>
-        /// /////////////////////////////////////////////////////////////////////////
-        /// </summary>
-        /// <param name="comment"></param>
-        /// <returns></returns>
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CreateComment([Bind(Include = "CommentID,CommentTitle,CommentWriter,commentWebSiteLink,text,PostID")] Comment comment)
@@ -98,12 +93,6 @@ namespace shauliTask3.Controllers
             ViewBag.PostID = new SelectList(db.Posts, "PostID", "Title", comment.PostID);
             return View(comment);
         }
-        /// <summary>
-        /// ///////////////////////////////////////////////////////
-        /// </summary>
-        /// <returns></returns>
-
-
 
         // GET: Comments/Create
         public ActionResult Create()
@@ -121,7 +110,6 @@ namespace shauliTask3.Controllers
         {
             if (ModelState.IsValid)
             {
-                /////////////////////////////////////////////////
                 Post post = db.Posts.Find(comment.PostID);
                 post.counter++;
                 db.comments.Add(comment);

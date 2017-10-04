@@ -13,7 +13,7 @@ namespace shauliTask3.Controllers
     public class MapsController : Controller
     {
         private MapsDbContext db = new MapsDbContext();
-        //daefef
+
         // GET: Maps
         public ActionResult Index()
         {

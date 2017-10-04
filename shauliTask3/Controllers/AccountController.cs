@@ -15,14 +15,10 @@ namespace shauliTask3.Controllers
     
     public class AccountController : Controller
     {
-     // private AccountDbContext db = new AccountDbContext();
-        // GET: Account
         public ActionResult Index()
         {
             if (Session["UserID"] == null)
             {
-
-                //shuld print into a text box--> " Admin only! login before"
                 return RedirectToAction("Login");
             }
             else if (((shauliTask3.Models.UsetAccount)Session["User"]).IsAdmin)
@@ -34,6 +30,7 @@ namespace shauliTask3.Controllers
                     return View(accounts.ToList());
                }
             }
+
             else
             {
                 String s = "You don't have premission. To return home page please click HomePage";
@@ -43,10 +40,6 @@ namespace shauliTask3.Controllers
                 
             }
         }
-
-
-
-
 
         public ActionResult Register()
         {
@@ -69,7 +62,7 @@ namespace shauliTask3.Controllers
             }
             return View();
         }
-        //login
+
         public ActionResult Login()
         {
             return View();
@@ -100,7 +93,6 @@ namespace shauliTask3.Controllers
                     Session["UserID"] = usr.UserId.ToString();
                     Session["UserName"] = usr.UserName.ToString();
                     Session["User"] = usr;
-
 
                     return RedirectToAction("LoggedIn");
                 }
@@ -142,7 +134,6 @@ namespace shauliTask3.Controllers
             }
         }
 
-        // POST: Posts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -173,7 +164,6 @@ namespace shauliTask3.Controllers
                 return View(user);
             }
         }
-
 
         public ActionResult Edit(int? id)
         {

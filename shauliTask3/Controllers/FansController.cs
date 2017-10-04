@@ -13,14 +13,13 @@ namespace shauliTask3.Controllers
     public class FansController : Controller
     {
         private FanDBContext db = new FanDBContext();
-        //testtefdsfvdsfv
+        
         // GET: Fans
         public ActionResult Index()
         {
             var fans = from s in db.Fan select s;
 
             return View(fans.ToList());
-         //   return View(db.Fan.ToList());
         }
 
         [HttpPost]
@@ -38,7 +37,7 @@ namespace shauliTask3.Controllers
                 where += "FirstName like '%" + SearchFirst + "%'";
             }
 
-            if (!String.IsNullOrEmpty(SearchLast))// should insert to here
+            if (!String.IsNullOrEmpty(SearchLast))
             {
                 select += "LastName ,";
 
@@ -61,7 +60,7 @@ namespace shauliTask3.Controllers
             }
             if (where == "")
             {
-                query = query.Substring(0, query.Length - 10);// empty query
+                query = query.Substring(0, query.Length - 10);
             }
 
             query = String.Format(query, where);
