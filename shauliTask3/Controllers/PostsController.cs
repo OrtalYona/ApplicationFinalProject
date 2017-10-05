@@ -21,7 +21,7 @@ namespace shauliTask3.Controllers
 
             if (Session["UserID"] == null)
             {
-                return RedirectToAction("Login","Account");
+                return RedirectToAction("Login", "Account");
             }
 
             else if (((shauliTask3.Models.UsetAccount)Session["User"]).IsAdmin)
@@ -38,7 +38,7 @@ namespace shauliTask3.Controllers
 
             }
         }
-        
+
 
         [HttpPost]
         public ViewResult Index(string SearchTitle, string SearchName)
@@ -77,7 +77,7 @@ namespace shauliTask3.Controllers
 
         public ActionResult Home()
         {
-            using (PostContext db=new PostContext())
+            using (PostContext db = new PostContext())
             {
                 ViewBag.TotalPosts = db.Posts.Count();
                 ViewBag.TotalComments = db.comments.Count();
@@ -182,7 +182,7 @@ namespace shauliTask3.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-        //    bool isAdmin = (Boolean)Session["isAmdin"];
+            //    bool isAdmin = (Boolean)Session["isAmdin"];
             Post post = db.Posts.Find(id);
             db.Posts.Remove(post);
             db.SaveChanges();
@@ -207,7 +207,7 @@ namespace shauliTask3.Controllers
         {
             var query = from i in db.Posts
                         group i by i.postWriter into g
-                        select new { PostWriter = g.Key, c=g.Count() };
+                        select new { PostWriter = g.Key, c = g.Count() };
 
             return View(query.ToList());
         }
@@ -216,8 +216,8 @@ namespace shauliTask3.Controllers
         {
 
             var query = from d in db.Posts
-                         join j in db.comments on d.PostID equals j.PostID
-                         select new { d.PostTitle, j.CommentTitle };
+                        join j in db.comments on d.PostID equals j.PostID
+                        select new { d.PostTitle, j.CommentTitle };
 
             return View(query.ToList());
         }

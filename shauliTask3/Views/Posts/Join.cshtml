@@ -18,15 +18,15 @@
         var postTitle = d.GetType().GetProperty("PostTitle").GetValue(d);
         var CommentTitle = d.GetType().GetProperty("CommentTitle").GetValue(d);
 
-            <tr>
-                <td>
-                    @postTitle
-                </td>
-                <td>
-                    @CommentTitle
-                </td>
-            </tr>
-        
+        <tr>
+            <td>
+                @postTitle
+            </td>
+            <td>
+                @CommentTitle
+            </td>
+        </tr>
+
     }
 
 </table>
