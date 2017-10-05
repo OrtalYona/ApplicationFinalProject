@@ -33,8 +33,7 @@ namespace shauliTask3.Controllers
 
             else
             {
-                String s = "You don't have premission. To return home page please click HomePage";
-                Console.WriteLine(s);
+
 
                 return RedirectToAction("Home", "Posts");
                 
@@ -77,7 +76,7 @@ namespace shauliTask3.Controllers
                 {
 
                     user.IsAdmin = true;
-                    user.UserId = 5;
+                    user.UserId = 0;
                     user.UserName = "admin";
                     Session["IsAdmin"] = user.IsAdmin.ToString();
                     Session["UserID"] = user.UserId.ToString();
@@ -203,7 +202,7 @@ namespace shauliTask3.Controllers
         {
             Session["UserID"] = null;
             Session.Clear();
-            return RedirectToAction("Home","Posts");
+            return RedirectToAction("Index","Home");
         }
 
     }

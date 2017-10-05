@@ -18,9 +18,25 @@ namespace shauliTask3.Controllers
 
         public ActionResult Index()
         {
-            var posts = from s in db.Posts select s;
 
-            return View(posts.ToList());
+            if (Session["UserID"] == null)
+            {
+                return RedirectToAction("Login","Account");
+            }
+
+            else if (((shauliTask3.Models.UsetAccount)Session["User"]).IsAdmin)
+            {
+
+                var posts = from s in db.Posts select s;
+
+                return View(posts.ToList());
+            }
+            else
+            {
+
+                return RedirectToAction("Index", "Home");
+
+            }
         }
         
 
@@ -166,7 +182,7 @@ namespace shauliTask3.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            bool isAdmin = (Boolean)Session["isAmdin"];
+        //    bool isAdmin = (Boolean)Session["isAmdin"];
             Post post = db.Posts.Find(id);
             db.Posts.Remove(post);
             db.SaveChanges();

@@ -70,9 +70,14 @@
             @Html.DisplayFor(modelItem => item.seniority)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.FanID }) |
+@if (((shauliTask3.Models.UsetAccount)Session["User"]).IsAdmin)
+{
+    @Html.ActionLink("Edit", "Edit", new { id = item.FanID });
+
+    @Html.ActionLink("Delete", "Delete", new { id = item.FanID });
+}
             @Html.ActionLink("Details", "Details", new { id=item.FanID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.FanID })
+         
         </td>
     </tr>
 }
